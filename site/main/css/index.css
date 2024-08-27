@@ -5,185 +5,367 @@ html, body {
     background: linear-gradient(90deg, rgba(42,42,42,1) 40%, rgba(61,61,61,1) 70%, rgba(78,78,78,1) 90%);
     font-family: 'Poppins', sans-serif;
     margin: 0;
-    height: 100%; /* Ensure the full height is utilized */
-    overflow-x: hidden; /* Prevent horizontal scrolling */
+    height: 100%;
+    overflow-x: hidden;
 }
 
-.section-one {
-    display: flex;
-    justify-content: space-evenly;
+.container {
+
     height: 100vh;
+
     width: 100vw;
+
+    display: flex;
+
 }
 
-.section-one .image.container {
+.image-container {
+
+    flex: 1 1 50%;
+
     display: flex;
+
     justify-content: center;
+
     align-items: center;
-    flex: 1 1 60%;
-    position: relative;
+
+    /* background-color: red; */
+
 }
 
-.section-one .container {
-    display: flex;
-    flex-direction: column;
-    flex: 1 1 40%;
-    overflow: hidden; /* Prevent the container from scrolling */
-    scroll-snap-type: y mandatory; /* Enable snap scrolling */
+.image-container div {
+
+    background-image: url('/site/main/media/me_fourth.png');
+
+    background-repeat: no-repeat;
+
+    background-size: contain;
+
+    background-position: center;
+
+    mix-blend-mode: lighten;
+
+    width: 50%;
+
+    transform: translateY(-5vh);
+
+    aspect-ratio: 1/1.7;
+
 }
 
-.section-one .container .welcome {
-    min-height: 100vh;
+.content {
+
+    flex: 1 1 50%;
+
+    /* background-color: orange; */
+
     display: flex;
+
+    flex-direction: row-reverse;
+
+}
+
+.content .markers {
+
+    display: flex;
+
+    justify-self: flex-end;
+
     flex-direction: column;
+
+    align-items: center;
+
     justify-content: center;
-    align-items: flex-start;
+
+    height: 100vh;
+
+    width: 2%;
+
+    background-color: #111;
+
 }
 
-.section-one .container .welcome h1,
-.section-one .container .welcome h3,
-.section-one .container .welcome p {
-    color: #f4f4f4;
-    margin: 0;
+.content .markers .marker {
+
+    height: clamp(60px, 5%, 200%);
+
+    width: calc(100% - 10px);
+
+    margin: 5px;
+
+    background-color: #333;
+
+    transition: all 0.2s ease-in-out;
+
 }
 
-.section-one .container .welcome h1 {
-    font-size: clamp(40px, 4vw, 100px);
-    color: orangered;
-    text-shadow: 5px 5px 1px #111;
+.content .markers .marker.active {
+
+    transform: translateX(-2px);
+
+    background-color: #f4f4f4;
+
+    transition: all 0.2s ease-in-out;
+
 }
 
-.section-one .container .welcome h3 {
-    font-size: clamp(40px, 2vw, 100px);
-}
+.snap-scrolling {
 
-.section-one .container .welcome p {
-    width: 70%;
-    font-size: clamp(20px, 0.5vw, 100px);
-}
-
-.snapscroll {
-    scroll-snap-align: start;
+    scroll-snap-type: both mandatory;
     scroll-behavior: smooth;
+    flex-grow: 1;
+    white-space: nowrap;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    width: 90%;
+    /* background-color: green; */
+
 }
 
-.internal-scroll {
-    overflow-y: auto; /* Allow vertical scrolling */
-    overflow-x: hidden; /* Prevent horizontal scrolling */
-    height: calc(100vh - 40px); /* Adjust height as needed */
-    position: relative; /* Ensure relative positioning for inner elements */
-    padding: 0; /* Remove default padding if any */
+.snap-scrolling > .snap-section {
+
+    display: block;
+    height: 100%;
+    width: 100%;
+    /* border-radius: 10%; */
+    /* margin: 5px; */
+    scroll-snap-align: center;
+
 }
 
-.internal-scroll::-webkit-scrollbar {
-    display: none; /* Optional: Hide scrollbar in webkit browsers */
-}
+/* SNAP SECTION CONTENT */
+/* WELCOME SECTION */
+.welcome {
 
-.timeline {
-    position: relative;
-    padding: 20px;
-    margin: 20px 0; /* Adjust margin to fit your design */
-    height: calc(100vh - 80px); /* Adjust height as needed */
-    overflow-y: auto; /* Allow vertical scrolling */
-}
+    width: calc(100% - 200px);
 
-.timeline .line {
-    left: calc(50% - 2px);
-    position: absolute;
-    width: 0;
-    border: solid 2px orangered;
-}
+    height: 100%;
 
-.timeline .cards {
+    margin-inline: 100px;
+
     display: flex;
+
     flex-direction: column;
-    align-items: center; /* Center the cards horizontally */
-    position: relative;
+
+    justify-content: center;
+
 }
 
-.timeline .cards .card {
-    max-height: 30vh;
-    border-radius: 0.5rem;
-    background-color: #212121;
-    width: 0%; /* Start with 0 width */
-    padding: 10px 0; /* No padding initially */
-    transition: width 1s ease-in-out, padding 1s ease-in-out, margin-left 1s ease-in-out, margin-right 1s ease-in-out;
-    position: relative;
+.welcome h3,
+.welcome h1,
+.welcome p {
+
+    width: 80%;
+
+    margin-block: 0;
+
+    text-wrap: wrap;
+
+    color: #f4f4f4;
+
+    font-family: 'Poppins', sans-serif;
+
 }
 
-.timeline .cards .card.active {
-    padding: 10px 30px; /* Add padding when active */
+.welcome h3 {
+
+    font-size: clamp(20px, 2em, 100px);
+
 }
 
-.timeline .cards .dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 20px;
-    background-color: orangered;
-    border: solid 2px white;
-    position: absolute;
-    top: 25px; /* Vertically center the dot */
-    transform: translateY(-50%); /* Center vertically */
-    opacity: 0; /* Start with the dot hidden */
-    transition: opacity 0.5s ease-in-out;
-}
+.welcome h1 {
 
-.timeline .cards .card.active .dot {
-    opacity: 1; /* Show the dot when card is active */
-}
+    font-size: clamp(20px, 4em, 100px);
 
-.timeline .cards .title {
-    font-size: clamp(12px, 1.5em, 100px);
-    margin: 0;
     color: orangered;
+
 }
 
-.timeline .cards .content {
-    max-height: 20vh;
-    overflow-y: auto; /* Allow vertical scrolling */
+.welcome p {
+
+    font-size: clamp(10px, 1.3em, 100px);
+
 }
 
-.timeline .cards .content p {
-    font-size: clamp(10px, 1em, 100px);
-    margin: 0;
-    color: white;
+/* TIMELINE SECTION */
+.timeline-container {
+
+    text-overflow: clip;
+
+    text-wrap: wrap;
+
+    text-wrap-mode: wrap;
+
+    display: flex;
+
+    flex-direction: row;
+
+    overflow-y: auto;
+
+    max-height: 100%;
+
+    position: relative;
+
+    scroll-behavior: smooth;
+
+    scrollbar-width: none;
+
 }
 
-.timeline .cards .text {
-    max-height: calc(30vh - 40px);
-    overflow: hidden;
+.timeline-container .line {
+
+    top: 0;
+
+    height: 100%;
+
+    left: 10px;
+
+    border: 1px solid #111;
+
+    position: absolute;
+
+    transition: height 0.1s linear;
+    
 }
 
-.timeline .cards .card:nth-child(2n-1) {
-    align-self: flex-start;
-    margin-left: calc(50% - 12px);
-    text-align: right;
+.timeline-cards {
+
+
+
 }
 
-.timeline .cards .card:nth-child(2n-1) .dot {
-    right: -19px; /* Position dot outside card on the right */
-    left: auto;
+.timeline-cards div:not(.card-dot, .card-text):first-child {
+
+    margin-top: 100px;
+
 }
 
-.timeline .cards .card:nth-child(2n-1).active {
-    width: calc(45% - 40px); /* Expand width to 40% of the container */
-    margin-left: 0%; /* Align to the left */
-    margin-right: auto; /* Expand towards the left */
+.timeline-cards div:not(.card-dot, .card-text):last-child {
+
+    margin-bottom: 100px;
+
 }
 
-.timeline .cards .card:nth-child(2n) {
-    align-self: flex-end;
-    margin-right: calc(50% - 12px);
-    text-align: left;
+.timeline-cards div:not(.card-dot, .card-text) {
+
+    width: calc(80% - 20px - 0.7rem);
+
+    margin-bottom: 40px;
+
+    padding-left: calc(20px + 0.7rem);
+
+    position: relative;
+
+    display: flex;
+
+    flex-direction: row;
+
 }
 
-.timeline .cards .card:nth-child(2n) .dot {
-    left: -19px; /* Position dot outside card on the left */
-    right: auto;
+.card-dot {
+
+    width: 1rem;
+
+    aspect-ratio: 1/1;
+
+    border-radius: 50%;
+
+    background-color: orangered;
+
+    border: 0.2rem solid #f4f4f4;
+
+    position: absolute;
+
+    /* left: calc(0px - 0.7rem); */
+
+    left: 0;
+
+    top: calc(20px + 0.7rem);
+
 }
 
-.timeline .cards .card:nth-child(2n).active {
-    width: calc(45% - 40px); /* Expand width to 40% of the container */
-    margin-right: 0; /* Align to the right */
-    margin-left: auto; /* Expand towards the right */
+.card-text {
+
+    height: 20vh;
+
+    display: flex;
+
+    flex-direction: column;
+
+    padding: 0px;
+
+    margin: 0px;
+
+    border-radius: 1rem;
+
+    background-color: #111;
+
+    width: 0;
+
+    overflow-x: hidden;
+
+    text-overflow: clip;
+
+    text-wrap: nowrap;
+
+}
+
+.card-text h1 {
+
+    margin-block: 0;
+
+    font-size: clamp(12px, 1.4rem, 100px);
+
+    color: orangered;
+
+}
+
+.card-text p {
+
+    font-size: clamp(10px, 0.8rem, 100px);
+
+    color: #f4f4f4;
+
+}
+
+.card-text.active {
+
+    height: 20vh;
+
+    display: flex;
+
+    flex-direction: column;
+
+    padding: 20px;
+
+    margin: 10px;
+
+    border-radius: 1rem;
+
+    background-color: #111;
+
+    width: 100%;
+
+}
+
+.card-text.active h1 {
+
+    margin-block: 0;
+
+    font-size: clamp(12px, 1.4rem, 100px);
+
+    color: orangered;
+
+}
+
+.card-text.active p {
+
+    text-wrap: wrap;
+
+    overflow-y: auto;
+
+    font-size: clamp(10px, 0.8rem, 100px);
+
+    color: #f4f4f4;
+
 }
