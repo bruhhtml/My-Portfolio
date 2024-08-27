@@ -1,0 +1,189 @@
+html, body {
+    background: rgb(42,42,42);
+    background: -moz-linear-gradient(90deg, rgba(42,42,42,1) 40%, rgba(61,61,61,1) 70%, rgba(78,78,78,1) 90%);
+    background: -webkit-linear-gradient(90deg, rgba(42,42,42,1) 40%, rgba(61,61,61,1) 70%, rgba(78,78,78,1) 90%);
+    background: linear-gradient(90deg, rgba(42,42,42,1) 40%, rgba(61,61,61,1) 70%, rgba(78,78,78,1) 90%);
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    height: 100%; /* Ensure the full height is utilized */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+.section-one {
+    display: flex;
+    justify-content: space-evenly;
+    height: 100vh;
+    width: 100vw;
+}
+
+.section-one .image.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1 1 60%;
+    position: relative;
+}
+
+.section-one .container {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 40%;
+    overflow: hidden; /* Prevent the container from scrolling */
+    scroll-snap-type: y mandatory; /* Enable snap scrolling */
+}
+
+.section-one .container .welcome {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.section-one .container .welcome h1,
+.section-one .container .welcome h3,
+.section-one .container .welcome p {
+    color: #f4f4f4;
+    margin: 0;
+}
+
+.section-one .container .welcome h1 {
+    font-size: clamp(40px, 4vw, 100px);
+    color: orangered;
+    text-shadow: 5px 5px 1px #111;
+}
+
+.section-one .container .welcome h3 {
+    font-size: clamp(40px, 2vw, 100px);
+}
+
+.section-one .container .welcome p {
+    width: 70%;
+    font-size: clamp(20px, 0.5vw, 100px);
+}
+
+.snapscroll {
+    scroll-snap-align: start;
+    scroll-behavior: smooth;
+}
+
+.internal-scroll {
+    overflow-y: auto; /* Allow vertical scrolling */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    height: calc(100vh - 40px); /* Adjust height as needed */
+    position: relative; /* Ensure relative positioning for inner elements */
+    padding: 0; /* Remove default padding if any */
+}
+
+.internal-scroll::-webkit-scrollbar {
+    display: none; /* Optional: Hide scrollbar in webkit browsers */
+}
+
+.timeline {
+    position: relative;
+    padding: 20px;
+    margin: 20px 0; /* Adjust margin to fit your design */
+    height: calc(100vh - 80px); /* Adjust height as needed */
+    overflow-y: auto; /* Allow vertical scrolling */
+}
+
+.timeline .line {
+    left: calc(50% - 2px);
+    position: absolute;
+    width: 0;
+    border: solid 2px orangered;
+}
+
+.timeline .cards {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center the cards horizontally */
+    position: relative;
+}
+
+.timeline .cards .card {
+    max-height: 30vh;
+    border-radius: 0.5rem;
+    background-color: #212121;
+    width: 0%; /* Start with 0 width */
+    padding: 10px 0; /* No padding initially */
+    transition: width 1s ease-in-out, padding 1s ease-in-out, margin-left 1s ease-in-out, margin-right 1s ease-in-out;
+    position: relative;
+}
+
+.timeline .cards .card.active {
+    padding: 10px 30px; /* Add padding when active */
+}
+
+.timeline .cards .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 20px;
+    background-color: orangered;
+    border: solid 2px white;
+    position: absolute;
+    top: 25px; /* Vertically center the dot */
+    transform: translateY(-50%); /* Center vertically */
+    opacity: 0; /* Start with the dot hidden */
+    transition: opacity 0.5s ease-in-out;
+}
+
+.timeline .cards .card.active .dot {
+    opacity: 1; /* Show the dot when card is active */
+}
+
+.timeline .cards .title {
+    font-size: clamp(12px, 1.5em, 100px);
+    margin: 0;
+    color: orangered;
+}
+
+.timeline .cards .content {
+    max-height: 20vh;
+    overflow-y: auto; /* Allow vertical scrolling */
+}
+
+.timeline .cards .content p {
+    font-size: clamp(10px, 1em, 100px);
+    margin: 0;
+    color: white;
+}
+
+.timeline .cards .text {
+    max-height: calc(30vh - 40px);
+    overflow: hidden;
+}
+
+.timeline .cards .card:nth-child(2n-1) {
+    align-self: flex-start;
+    margin-left: calc(50% - 12px);
+    text-align: right;
+}
+
+.timeline .cards .card:nth-child(2n-1) .dot {
+    right: -19px; /* Position dot outside card on the right */
+    left: auto;
+}
+
+.timeline .cards .card:nth-child(2n-1).active {
+    width: calc(45% - 40px); /* Expand width to 40% of the container */
+    margin-left: 0%; /* Align to the left */
+    margin-right: auto; /* Expand towards the left */
+}
+
+.timeline .cards .card:nth-child(2n) {
+    align-self: flex-end;
+    margin-right: calc(50% - 12px);
+    text-align: left;
+}
+
+.timeline .cards .card:nth-child(2n) .dot {
+    left: -19px; /* Position dot outside card on the left */
+    right: auto;
+}
+
+.timeline .cards .card:nth-child(2n).active {
+    width: calc(45% - 40px); /* Expand width to 40% of the container */
+    margin-right: 0; /* Align to the right */
+    margin-left: auto; /* Expand towards the right */
+}
